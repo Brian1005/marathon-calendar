@@ -1,0 +1,17 @@
+{
+  "name": "running-calendar",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "ics": "node scripts/gen-ics.mjs",
+    "dev": "npm run ics && vite",
+    "build": "npm run ics && tsc && vite build",
+    "preview": "vite preview",
+    "check": "node --experimental-strip-types scripts/check.ts"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5"
+  }
+}

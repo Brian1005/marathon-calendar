@@ -1,0 +1,113 @@
+{
+  "updatedAt": "2026-11-25",
+  "races": [
+    {
+      "id": "samil", "name": "머니투데이방송 3·1절 마라톤", "region": "수도권", "place": "서울 뚝섬한강공원",
+      "date": "2027-03-01", "start": "09:00",
+      "status": "open", "statusText": "접수 중 (2차 접수 개시 11/05 공지)",
+      "stages": [{ "label": "5K·10K·하프 접수", "opens": null, "closes": null }],
+      "note": "요강의 신청기한 칸이 비어 있음 → 마감 미공지.",
+      "url": "https://mara1080.com/event/83acaaf1-1e30-411a-ac71-5e909ba1f7d9", "verifiedAt": "2026-11-25"
+    },
+    {
+      "id": "bucheon", "name": "부천국제10km", "region": "수도권", "place": "경기 부천",
+      "date": "2027-03-07", "start": "08:00", "startNote": "예정",
+      "status": "open", "statusText": "접수 중",
+      "stages": [{ "label": "10K·3.5K 접수", "opens": null, "closes": "2027-01-06T16:00" }],
+      "note": "1만 명 선착순.",
+      "url": "https://bskrun.co.kr", "verifiedAt": "2026-11-25"
+    },
+    {
+      "id": "muju", "name": "무주 반딧불 하프마라톤", "region": "호남", "place": "전북 무주 등나무운동장",
+      "date": "2027-03-07", "start": "08:30",
+      "status": "open", "statusText": "접수 중 (신청 화면 열림)",
+      "stages": [{ "label": "5K·10K·하프 접수", "opens": null, "closes": null }],
+      "note": "3,000명 입금되면 마감.",
+      "url": "https://mara1080.com/event/6b68a627-24cf-4844-ac1d-9358b2a54227", "verifiedAt": "2026-11-25"
+    },
+    {
+      "id": "geumsan", "name": "금산 인삼 웰빙 마라톤", "region": "충청", "place": "충남 금산인삼엑스포주차장",
+      "date": "2027-03-13", "start": "09:00",
+      "status": "unknown", "statusText": "접수 시작일 미공지",
+      "stages": [{ "label": "5K·10K·하프 접수", "opens": null, "closes": null }],
+      "note": "3,000명 입금되면 마감.",
+      "url": "https://mara1080.com/event/6397382b-be8d-4aee-b724-68f9fad03f29", "verifiedAt": "2026-11-25"
+    },
+    {
+      "id": "icheon", "name": "이천 도자기 마라톤", "region": "수도권", "place": "경기 이천종합운동장",
+      "date": "2027-03-14", "start": "08:30",
+      "status": "unknown", "statusText": "접수 시작일 미공지",
+      "stages": [{ "label": "5K·10K·하프 접수", "opens": null, "closes": null }],
+      "note": "선착순 6,000명 신청·입금되면 마감.",
+      "url": "https://mara1080.com/event/2b3a03c4-4fc6-4d34-8a33-2449fafcaa23", "verifiedAt": "2026-11-25"
+    },
+    {
+      "id": "hapcheon", "name": "합천 벚꽃마라톤", "region": "영남", "place": "경남 합천",
+      "date": "2027-03-28", "start": "09:00",
+      "status": "auto",
+      "stages": [
+        { "label": "풀·하프", "opens": "2026-12-01T10:00", "closes": null },
+        { "label": "10K·5K", "opens": "2026-12-02T10:00", "closes": null },
+        { "label": "단체", "opens": "2026-12-07T10:00", "closes": null }
+      ],
+      "note": "마감 미공지.",
+      "url": "https://hcmrt.or.kr", "verifiedAt": "2026-11-25"
+    },
+    {
+      "id": "yeongju", "name": "영주 소백산마라톤", "region": "영남", "place": "경북 영주시민운동장",
+      "date": "2027-04-04", "start": "08:30", "startNote": "풀 기준, 10분 간격",
+      "status": "unknown", "statusText": "접수기간 미공지",
+      "stages": [{ "label": "전 종목 접수", "opens": null, "closes": null }],
+      "note": "총 15,000명, 종목별 선착순. 전액 환불은 2027-01-31 24:00까지.",
+      "url": "https://sobaekmarathon.go.kr/yeongju/", "verifiedAt": "2026-11-25"
+    },
+    {
+      "id": "yangcheon", "name": "양천 마라톤", "region": "수도권", "place": "서울 안양천 해마루축구장",
+      "date": "2027-04-10", "start": "08:30", "startNote": "하프 · 10K 08:40 · 5K 08:45",
+      "status": "auto",
+      "stages": [{ "label": "개인·단체·패밀리런", "opens": "2027-01-05", "closes": null }],
+      "note": "선착순 7,000명. 접수 시각은 미공지. 수정·환불 마감 2027-02-05 16:00.",
+      "url": "https://ycrun.com/page/guide", "verifiedAt": "2026-11-25"
+    },
+    {
+      "id": "incheon", "name": "인천 K 마라톤", "region": "수도권", "place": "인천",
+      "date": "2027-04-11", "start": "08:00",
+      "status": "open", "statusText": "추가접수 중 (11/13 공지)",
+      "stages": [
+        { "label": "정규접수", "opens": null, "closes": null, "done": true },
+        { "label": "추가접수", "opens": null, "closes": null }
+      ],
+      "note": "정규접수는 마감 (11/12 공지).",
+      "url": "https://k-player.or.kr/incheon2027", "verifiedAt": "2026-11-25"
+    },
+    {
+      "id": "gijang", "name": "오션뷰 기장바다마라톤", "region": "영남", "place": "부산 오시리아 일원",
+      "date": "2027-04-18", "start": "07:30",
+      "status": "closed", "statusText": "마감 (9,500명 모집 완료)",
+      "stages": [{ "label": "하프·10K·3K", "opens": "2026-11-01T10:00", "closes": null }],
+      "note": "취소자가 생기면 추가모집 예정 (11/04 공지).",
+      "url": "https://badarun.co.kr", "verifiedAt": "2026-11-25"
+    },
+    {
+      "id": "gangneung", "name": "강릉 헌화로 11k RUN", "region": "강원", "place": "강원 강릉 옥계면",
+      "date": "2027-04-24", "start": "08:30",
+      "status": "auto",
+      "stages": [{ "label": "11k·커플런", "opens": "2027-01-11T10:00", "closes": null }],
+      "note": "선착순 3,000명.",
+      "url": "https://www.xn--11k-9o7l940cuub9v9gd5a.com/", "verifiedAt": "2026-11-25"
+    },
+    {
+      "id": "soaam", "name": "소아암환우돕기 서울시민 마라톤", "region": "수도권", "place": "서울 여의도 한강공원 물빛광장",
+      "date": "2027-05-16", "start": "08:00", "startNote": "하프 · 10K 08:10 · 5K 08:20",
+      "status": "auto",
+      "stages": [{ "label": "전 종목 접수", "opens": "2027-01-18", "closes": "2027-03-30" }],
+      "note": "선착순 3,000명. 접수 시각은 미공지.",
+      "url": "https://soaam.runningdr.co.kr", "verifiedAt": "2026-11-25"
+    }
+  ],
+  "pending": [
+    "다대포 (부산) · 2027-03-14(일) · 마감일이 출처마다 12/4, 12/5로 달라 공식 확인 필요",
+    "포항 통일기원 (경북) · 2027-04-25 · 공식 사이트에 2027 정보 없음 (작년엔 12/15 09:00 오픈)",
+    "3·15 마산 (경남) · 공식 사이트에 34회 정보 없음"
+  ]
+}

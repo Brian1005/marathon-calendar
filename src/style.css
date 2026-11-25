@@ -1,0 +1,149 @@
+
+/* Layout: 상단 "다음 접수" 카운트다운 → 필터 → 배번(bib) 모양 카드 리스트. 카드 큰 숫자 = 대회일 */
+:root {
+  --bg: #eef1f4;
+  --paper: #ffffff;
+  --ink: #141a22;
+  --muted: #5b6675;
+  --line: #d5dbe3;
+  --accent: #1f4fd8;
+  --accent-ink: #ffffff;
+  --open: #0f7a45;
+  --open-bg: #e1f4ea;
+  --soon: #a15c00;
+  --soon-bg: #fdf0d9;
+  --closed: #8a2d2d;
+  --closed-bg: #f7e3e3;
+  --unknown: #4d5766;
+  --unknown-bg: #e7eaef;
+  --f-display: "Black Han Sans", "IBM Plex Sans KR", system-ui, sans-serif;
+  --f-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f141b; --paper: #18202a; --ink: #e8edf3; --muted: #9aa6b5; --line: #2a3542;
+    --accent: #7c9dff; --accent-ink: #0f141b;
+    --open: #5fd39a; --open-bg: #143325; --soon: #f2b866; --soon-bg: #3a2a12;
+    --closed: #f09a9a; --closed-bg: #3a1c1c; --unknown: #b4bdca; --unknown-bg: #232c38;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f141b; --paper: #18202a; --ink: #e8edf3; --muted: #9aa6b5; --line: #2a3542;
+  --accent: #7c9dff; --accent-ink: #0f141b;
+  --open: #5fd39a; --open-bg: #143325; --soon: #f2b866; --soon-bg: #3a2a12;
+  --closed: #f09a9a; --closed-bg: #3a1c1c; --unknown: #b4bdca; --unknown-bg: #232c38;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.55;
+}
+.wrap {
+  max-width: 960px; margin: 0 auto;
+  padding-block: 28px 56px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 24px;
+}
+header h1 { font-family: var(--f-display); font-weight: 400; font-size: clamp(28px, 6vw, 42px); line-height: 1.1; margin: 0; text-wrap: balance; }
+header p { margin: 6px 0 0; color: var(--muted); }
+
+/* 다음 접수 */
+.next {
+  background: var(--accent); color: var(--accent-ink); border-radius: 14px;
+  padding: 20px 22px; display: grid; gap: 10px;
+}
+.next .eyebrow { font-size: 12px; letter-spacing: .08em; font-weight: 700; opacity: .85; }
+.next .what { font-size: 19px; font-weight: 700; }
+.next .when { font-family: var(--f-mono); font-size: 14px; opacity: .9; }
+.count { display: flex; gap: 14px; flex-wrap: wrap; font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+.count div { display: grid; }
+.count b { font-size: clamp(28px, 7vw, 40px); line-height: 1; }
+.count span { font-size: 11px; opacity: .8; letter-spacing: .06em; }
+.next a { color: inherit; font-weight: 700; }
+
+/* 필터 */
+.filters { display: grid; gap: 10px; }
+.row { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+  font: 500 13px var(--f-body); padding: 6px 12px; border-radius: 999px;
+  border: 1px solid var(--line); background: var(--paper); color: var(--ink); cursor: pointer;
+}
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* 배번 카드 */
+.list { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 290px), 1fr)); }
+.bib {
+  background: var(--paper); border: 1px solid var(--line); border-radius: 10px; position: relative;
+  display: grid; grid-template-rows: auto auto 1fr auto; min-width: 0; overflow: hidden;
+}
+.bib::before, .bib::after { /* 옷핀 구멍 */
+  content: ""; position: absolute; top: 10px; width: 8px; height: 8px; border-radius: 50%;
+  background: var(--bg); border: 1px solid var(--line);
+}
+.bib::before { left: 10px; } .bib::after { right: 10px; }
+.bib-top { display: flex; justify-content: center; gap: 8px; padding: 8px 28px 0; font-size: 12px; color: var(--muted); letter-spacing: .04em; }
+.bib-num { text-align: center; padding: 4px 12px 8px; border-bottom: 1px dashed var(--line); }
+.bib-num .d { font-family: var(--f-display); font-size: 52px; line-height: 1; letter-spacing: .02em; font-variant-numeric: tabular-nums; }
+.bib-num .dow { font-size: 13px; color: var(--muted); margin-left: 4px; }
+.bib-num .name { font-weight: 700; font-size: 16px; margin-top: 4px; text-wrap: balance; }
+.bib-num .start { font-family: var(--f-mono); font-size: 12px; color: var(--muted); }
+.bib-body { padding: 12px 14px; display: grid; gap: 10px; align-content: start; }
+.status { justify-self: start; font-size: 12px; font-weight: 700; padding: 3px 9px; border-radius: 6px; }
+.s-open { color: var(--open); background: var(--open-bg); }
+.s-soon { color: var(--soon); background: var(--soon-bg); }
+.s-closed { color: var(--closed); background: var(--closed-bg); }
+.s-unknown { color: var(--unknown); background: var(--unknown-bg); }
+.stages { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.stages li { display: grid; grid-template-columns: 1fr auto; gap: 2px 8px; align-items: baseline; font-size: 13px; }
+.stages .lab { color: var(--muted); }
+.stages .t { font-family: var(--f-mono); font-variant-numeric: tabular-nums; font-size: 12.5px; text-align: right; }
+.stages .dd { grid-column: 1 / -1; font-size: 12px; color: var(--soon); font-weight: 700; }
+.stages .cal { grid-column: 1 / -1; font-size: 12px; }
+.note { font-size: 12.5px; color: var(--muted); margin: 0; }
+.bib-foot { display: flex; justify-content: space-between; gap: 8px; padding: 10px 14px; border-top: 1px solid var(--line); font-size: 12px; }
+a { color: var(--accent); }
+.empty { color: var(--muted); padding: 24px 0; }
+
+.pending { display: grid; gap: 8px; }
+.pending h2, footer h2 { font-size: 14px; margin: 0; letter-spacing: .04em; color: var(--muted); }
+.pending ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; font-size: 13.5px; }
+footer { font-size: 12.5px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 14px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* 접수했어요 버튼 */
+.reg {
+  justify-self: start; font: 700 12.5px var(--f-body); padding: 6px 12px; border-radius: 8px; cursor: pointer;
+  border: 1px solid var(--accent); background: transparent; color: var(--accent);
+}
+.reg:hover { background: var(--accent); color: var(--accent-ink); }
+.reg:focus-visible, .unreg:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.bib-foot .links { display: flex; gap: 10px; }
+
+/* 내 대회 */
+.mine-section { display: grid; gap: 10px; }
+.mine-section h2 { font-family: var(--f-display); font-weight: 400; font-size: 22px; margin: 0; }
+.mine-list { display: grid; gap: 10px; }
+.mine {
+  display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: center;
+  background: var(--paper); border: 2px solid var(--open); border-radius: 12px; padding: 12px 14px;
+}
+.mine-dd { font-family: var(--f-display); font-size: 30px; color: var(--open); min-width: 84px; text-align: center; font-variant-numeric: tabular-nums; }
+.mine-main { min-width: 0; display: grid; gap: 2px; }
+.mine-name { font-weight: 700; }
+.mine-when { font-family: var(--f-mono); font-size: 12.5px; }
+.mine-where { font-size: 12.5px; color: var(--muted); }
+.unreg { font: 500 12px var(--f-body); padding: 5px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); color: var(--muted); cursor: pointer; }
+@media (max-width: 480px) {
+  .mine { grid-template-columns: 1fr; text-align: left; }
+  .mine-dd { text-align: left; }
+  .unreg { justify-self: start; }
+}
+
+/* 마감된 대회 */
+.closed-section summary { cursor: pointer; color: var(--muted); font-size: 13.5px; }
+.closed-section .list { margin-top: 12px; }

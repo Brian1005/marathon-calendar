@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>2027 봄 마라톤 접수판</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=IBM+Plex+Sans+KR:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap"
+    />
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <h1>2027 봄 마라톤 접수판</h1>
+        <p>공식 페이지에서 확인한 값만 담았습니다. 공지되지 않은 값은 "미공지"로 둡니다.</p>
+      </header>
+
+      <section class="next" id="next" aria-live="polite"></section>
+
+      <section id="mine-section" class="mine-section" hidden>
+        <h2>내 대회</h2>
+        <div id="mine" class="mine-list"></div>
+      </section>
+
+      <section class="filters" aria-label="필터">
+        <div class="row" id="f-status"></div>
+        <div class="row" id="f-region"></div>
+      </section>
+
+      <section class="list" id="list"></section>
+
+      <details id="closed-section" class="closed-section" hidden>
+        <summary>마감된 대회 <span id="closed-count"></span>개 (이미 접수했다면 여기서 체크)</summary>
+        <div id="closed" class="list"></div>
+      </details>
+
+      <section class="pending">
+        <h2>정보 대기 중</h2>
+        <ul id="pending"></ul>
+      </section>
+
+      <footer>
+        데이터 확인일 <span id="updated"></span> (KST) · 시각은 모두 한국 시간 · 접수 직전 공식 페이지를 다시 확인하세요.
+        · <a href="ics/all.ics">전체 접수 일정 .ics</a>
+      </footer>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
