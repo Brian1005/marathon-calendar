@@ -73,6 +73,7 @@ function bibCard(r: Race, now: Date): HTMLElement {
       <span class="status s-${st.key}">${esc(st.text)}</span>
       <ul class="stages">${stageRows(r, now)}</ul>
       <p class="note">${esc(r.note)}</p>
+      <p class="verified">공식 확인 ${fmt(r.verifiedAt)}</p>
     </div>
     <div class="bib-foot">
       <span>${esc(r.place)}</span>
