@@ -71,10 +71,6 @@ export function statusOf(r: Race, now: Date): { key: StatusKey; text: string } {
 /** 대회일이 지났는지 (대회 당일까지는 false) */
 export const raceOver = (r: Race, now: Date) => endOf(r.date) <= now;
 
-/** 접수한 대회: 대회 다음 날 24:00까지 보여 줌 */
-export const keepRegistered = (r: Race, now: Date) =>
-  new Date(endOf(r.date).getTime() + DAY) > now;
-
 /** 메인 목록에 보일지: 마감·지난 대회는 숨김 */
 export const isListed = (r: Race, now: Date) =>
   !raceOver(r, now) && statusOf(r, now).key !== "closed";
@@ -89,6 +85,21 @@ export function nextOpening(races: Race[], now: Date): { race: Race; stage: Stag
     }
   }
   return best;
+}
+
+/** 접수한 대회의 대회일 일정 → Google 캘린더 "일정 추가" 링크 (출발부터 3시간) */
+export function gcalRaceLink(r: Race): string {
+  const start = `${r.date}T${r.start}`;
+  const end = new Date(toDate(start).getTime() + 3 * 3_600_000 + KST).toISOString().slice(0, 16);
+  const p = new URLSearchParams({
+    action: "TEMPLATE",
+    text: `🏁 ${r.name}`,
+    dates: `${start.replace(/[-:]/g, "")}00/${end.replace(/[-:]/g, "")}00`,
+    ctz: "Asia/Seoul",
+    location: r.place,
+    details: `출발 ${r.start}${r.startNote ? ` (${r.startNote})` : ""}\n공식: ${r.url}`,
+  });
+  return `https://calendar.google.com/calendar/render?${p}`;
 }
 
 /** Google 캘린더 "일정 추가" 링크 */

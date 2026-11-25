@@ -1,7 +1,7 @@
 // 날짜·상태 로직 점검: npm run check
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { dday, dowOf, fmt, isListed, keepRegistered, nextOpening, statusOf, type Race } from "../src/logic.ts";
+import { dday, dowOf, fmt, gcalRaceLink, isListed, nextOpening, statusOf, type Race } from "../src/logic.ts";
 
 const data = JSON.parse(readFileSync(new URL("../data/races.json", import.meta.url), "utf8"));
 const races = data.races as Race[];
@@ -35,10 +35,10 @@ assert.equal(isListed(sm, at("2027-03-31T00:00:01")), false);
 // 기장(수동 마감) → 목록에서 숨김
 assert.equal(isListed(byId("gijang"), at("2026-11-25T12:00:00")), false);
 
-// 접수한 대회: 대회 다음 날 24:00까지 유지
-const gn = byId("gangneung"); // 2027-04-24
-assert.equal(keepRegistered(gn, at("2027-04-25T23:59:00")), true);
-assert.equal(keepRegistered(gn, at("2027-04-26T00:00:01")), false);
+// 접수했어요 → 대회일 캘린더 링크: 강릉 2027-04-24 08:30~11:30 KST
+const link = new URL(gcalRaceLink(byId("gangneung")));
+assert.equal(link.searchParams.get("dates"), "20270424T083000/20270424T113000");
+assert.equal(link.searchParams.get("ctz"), "Asia/Seoul");
 
 // 다음 오픈
 assert.equal(nextOpening(races, at("2026-11-25T21:00:00"))?.race.id, "hapcheon");

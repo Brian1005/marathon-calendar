@@ -2,9 +2,9 @@ import "./style.css";
 import data from "../data/races.json";
 import {
   type Race, type StatusKey,
-  dday, dowOf, fmt, gcalLink, hasTime, isListed, keepRegistered, nextOpening, raceOver, statusOf, toDate,
+  dday, dowOf, fmt, gcalLink, gcalRaceLink, hasTime, isListed, nextOpening, raceOver, statusOf, toDate,
 } from "./logic";
-import { getFilter, getRegistered, setFilter, setRegistered } from "./store";
+import { getFilter, setFilter } from "./store";
 
 const races = data.races as Race[];
 const BASE = import.meta.env.BASE_URL;
@@ -15,17 +15,10 @@ const STATUS_LABEL: Record<"all" | StatusKey, string> = {
 const REGIONS = ["전체", "수도권", "강원", "충청", "호남", "영남", "제주"];
 
 let filter = getFilter();
-let registered = getRegistered();
 
 const $ = (id: string) => document.getElementById(id)!;
 const esc = (s: string) =>
   s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]!);
-
-function toggleRegistered(id: string) {
-  registered.has(id) ? registered.delete(id) : registered.add(id);
-  setRegistered(registered);
-  render();
-}
 
 function chips(el: HTMLElement, items: [string, string][], cur: string, onPick: (v: string) => void) {
   el.replaceChildren(
@@ -74,6 +67,8 @@ function bibCard(r: Race, now: Date): HTMLElement {
       <ul class="stages">${stageRows(r, now)}</ul>
       <p class="note">${esc(r.note)}</p>
       <p class="verified">공식 확인 ${fmt(r.verifiedAt)}</p>
+      <a class="reg" id="reg-${r.id}" href="${gcalRaceLink(r)}" target="_blank" rel="noopener"
+         title="Google 캘린더에 대회일(${fmt(r.date)} ${r.start} 출발) 일정 추가">접수했어요 · 캘린더에 대회일 추가 ↗</a>
     </div>
     <div class="bib-foot">
       <span>${esc(r.place)}</span>
@@ -82,42 +77,13 @@ function bibCard(r: Race, now: Date): HTMLElement {
         <a href="${r.url}" target="_blank" rel="noopener">공식 ↗</a>
       </span>
     </div>`;
-  const btn = document.createElement("button");
-  btn.type = "button";
-  btn.className = "reg";
-  btn.id = `reg-${r.id}`;
-  btn.textContent = "접수했어요";
-  btn.addEventListener("click", () => toggleRegistered(r.id));
-  card.querySelector(".bib-body")!.appendChild(btn);
   return card;
-}
-
-function myCard(r: Race, now: Date): HTMLElement {
-  const over = raceOver(r, now);
-  const dd = dday(r.date, now);
-  const el = document.createElement("article");
-  el.className = "mine";
-  el.innerHTML = `
-    <div class="mine-dd">${over ? "완주 축하!" : dd}</div>
-    <div class="mine-main">
-      <div class="mine-name">${esc(r.name)}</div>
-      <div class="mine-when">${fmt(r.date)} · 출발 ${r.start}${r.startNote ? ` (${esc(r.startNote)})` : ""}</div>
-      <div class="mine-where">${esc(r.place)} · <a href="${r.url}" target="_blank" rel="noopener">공식 ↗</a></div>
-    </div>`;
-  const btn = document.createElement("button");
-  btn.type = "button";
-  btn.className = "unreg";
-  btn.id = `unreg-${r.id}`;
-  btn.textContent = "체크 해제";
-  btn.addEventListener("click", () => toggleRegistered(r.id));
-  el.appendChild(btn);
-  return el;
 }
 
 function renderNext() {
   const now = new Date();
   const el = $("next");
-  const n = nextOpening(races.filter((r) => !registered.has(r.id)), now);
+  const n = nextOpening(races, now);
   if (!n) {
     el.innerHTML = `<div class="eyebrow">다음 접수 오픈</div><div class="what">예정된 접수 오픈이 없습니다.</div>`;
     return;
@@ -144,13 +110,6 @@ function renderNext() {
 function render() {
   const now = new Date();
 
-  // 내 대회: 접수 체크한 대회, 대회 다음 날까지
-  const mine = races
-    .filter((r) => registered.has(r.id) && keepRegistered(r, now))
-    .sort((a, b) => a.date.localeCompare(b.date));
-  $("mine-section").hidden = mine.length === 0;
-  $("mine").replaceChildren(...mine.map((r) => myCard(r, now)));
-
   chips($("f-status"), Object.entries(STATUS_LABEL).filter(([k]) => k !== "closed"), filter.status, (v) => {
     filter = { ...filter, status: v }; setFilter(filter); render();
   });
@@ -159,7 +118,7 @@ function render() {
   });
 
   const rows = races
-    .filter((r) => !registered.has(r.id) && isListed(r, now))
+    .filter((r) => isListed(r, now))
     .filter((r) => filter.status === "all" || statusOf(r, now).key === filter.status)
     .filter((r) => filter.region === "전체" || r.region === filter.region)
     .sort((a, b) => a.date.localeCompare(b.date));
@@ -168,7 +127,7 @@ function render() {
   else list.innerHTML = `<p class="empty">조건에 맞는 대회가 없습니다.</p>`;
 
   // 마감됐지만 아직 안 열린 대회 (이미 접수한 경우 체크용)
-  const closed = races.filter((r) => !registered.has(r.id) && !isListed(r, now) && !raceOver(r, now));
+  const closed = races.filter((r) => !isListed(r, now) && !raceOver(r, now));
   $("closed-section").hidden = closed.length === 0;
   $("closed-count").textContent = String(closed.length);
   $("closed").replaceChildren(...closed.map((r) => bibCard(r, now)));
