@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-25",
+  "updatedAt": "2026-11-27",
   "races": [
     {
       "id": "samil",
@@ -19,7 +19,7 @@
       ],
       "note": "요강의 신청기한 칸이 비어 있음 → 마감 미공지.",
       "url": "https://mara1080.com/event/83acaaf1-1e30-411a-ac71-5e909ba1f7d9",
-      "verifiedAt": "2026-11-25"
+      "verifiedAt": "2026-11-27"
     },
     {
       "id": "bucheon",
@@ -40,7 +40,7 @@
       ],
       "note": "1만 명 선착순.",
       "url": "https://bskrun.co.kr",
-      "verifiedAt": "2026-11-25"
+      "verifiedAt": "2026-11-27"
     },
     {
       "id": "muju",
@@ -60,7 +60,7 @@
       ],
       "note": "3,000명 입금되면 마감.",
       "url": "https://mara1080.com/event/6b68a627-24cf-4844-ac1d-9358b2a54227",
-      "verifiedAt": "2026-11-25"
+      "verifiedAt": "2026-11-27"
     },
     {
       "id": "geumsan",
@@ -80,7 +80,7 @@
       ],
       "note": "3,000명 입금되면 마감.",
       "url": "https://mara1080.com/event/6397382b-be8d-4aee-b724-68f9fad03f29",
-      "verifiedAt": "2026-11-25"
+      "verifiedAt": "2026-11-27"
     },
     {
       "id": "icheon",
@@ -100,7 +100,7 @@
       ],
       "note": "선착순 6,000명 신청·입금되면 마감.",
       "url": "https://mara1080.com/event/2b3a03c4-4fc6-4d34-8a33-2449fafcaa23",
-      "verifiedAt": "2026-11-25"
+      "verifiedAt": "2026-11-27"
     },
     {
       "id": "hapcheon",
@@ -129,7 +129,7 @@
       ],
       "note": "마감 미공지.",
       "url": "https://hcmrt.or.kr",
-      "verifiedAt": "2026-11-25"
+      "verifiedAt": "2026-11-27"
     },
     {
       "id": "yeongju",
@@ -150,7 +150,7 @@
       ],
       "note": "총 15,000명, 종목별 선착순. 전액 환불은 2027-01-31 24:00까지.",
       "url": "https://sobaekmarathon.go.kr/yeongju/",
-      "verifiedAt": "2026-11-25"
+      "verifiedAt": "2026-11-27"
     },
     {
       "id": "yangcheon",
@@ -170,7 +170,7 @@
       ],
       "note": "선착순 7,000명. 접수 시각은 미공지. 수정·환불 마감 2027-02-05 16:00.",
       "url": "https://ycrun.com/page/guide",
-      "verifiedAt": "2026-11-25"
+      "verifiedAt": "2026-11-27"
     },
     {
       "id": "incheon",
@@ -190,13 +190,13 @@
         },
         {
           "label": "추가접수",
-          "opens": null,
+          "opens": "2026-11-14T13:00",
           "closes": null
         }
       ],
       "note": "정규접수는 마감 (11/12 공지).",
       "url": "https://k-player.or.kr/incheon2027",
-      "verifiedAt": "2026-11-25"
+      "verifiedAt": "2026-11-27"
     },
     {
       "id": "gijang",
@@ -217,7 +217,7 @@
       ],
       "note": "11/04 공지로 9,500명 모집 완료·마감. 취소분 추가모집은 '예정'으로만 공지됐고 날짜는 아직 없음.",
       "url": "https://badarun.co.kr",
-      "verifiedAt": "2026-11-25"
+      "verifiedAt": "2026-11-27"
     },
     {
       "id": "gangneung",
@@ -236,7 +236,7 @@
       ],
       "note": "선착순 3,000명.",
       "url": "https://www.xn--11k-9o7l940cuub9v9gd5a.com/",
-      "verifiedAt": "2026-11-25"
+      "verifiedAt": "2026-11-27"
     },
     {
       "id": "soaam",
@@ -256,7 +256,7 @@
       ],
       "note": "선착순 3,000명. 접수 시각은 미공지.",
       "url": "https://soaam.runningdr.co.kr",
-      "verifiedAt": "2026-11-25"
+      "verifiedAt": "2026-11-27"
     }
   ],
   "pending": [
