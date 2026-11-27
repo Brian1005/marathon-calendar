@@ -132,6 +132,7 @@ function render() {
   $("closed-count").textContent = String(closed.length);
   $("closed").replaceChildren(...closed.map((r) => bibCard(r, now)));
 
+  $("pending").closest("section")!.hidden = data.pending.length === 0;
   $("pending").innerHTML = data.pending.map((p) => `<li>${esc(p)}</li>`).join("");
   $("updated").textContent = data.updatedAt;
   renderNext();
