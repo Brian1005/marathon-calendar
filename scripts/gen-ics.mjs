@@ -15,6 +15,7 @@ const nextDay = (s) => {
   return d.toISOString().slice(0, 10).replace(/-/g, "");
 };
 const local = (date, hm) => `${ymd(date)}T${hm.replace(":", "")}00`;
+const startLabel = (r) => `${r.start ? `출발 ${r.start}` : "출발 시각 미공지"}${r.startNote ? ` (${r.startNote})` : ""}`;
 const addMin = (date, hm, min) => {
   const d = new Date(`${date}T${hm}:00Z`);
   d.setUTCMinutes(d.getUTCMinutes() + min);
@@ -49,7 +50,7 @@ function stageEvents(r) {
           ? [`DTSTART;TZID=Asia/Seoul:${local(date, hm)}`, `DTEND;TZID=Asia/Seoul:${addMin(date, hm, 30)}`]
           : [`DTSTART;VALUE=DATE:${ymd(date)}`, `DTEND;VALUE=DATE:${nextDay(date)}`]),
         `SUMMARY:${esc(`🏃 ${r.name} 접수 오픈 (${s.label})`)}`,
-        `DESCRIPTION:${esc(`대회 ${r.date} ${r.start} 출발${timed ? "" : "\n접수 시각 미공지"}\n${r.url}`)}`,
+        `DESCRIPTION:${esc(`대회 ${r.date} ${startLabel(r)}${timed ? "" : "\n접수 시각 미공지"}\n${r.url}`)}`,
         `URL:${r.url}`,
         ...(timed ? alarms : []),
         "END:VEVENT",
@@ -62,11 +63,12 @@ function raceEvent(r) {
     "BEGIN:VEVENT",
     `UID:${r.id}-race@running-calendar`,
     `DTSTAMP:${stamp}`,
-    `DTSTART;TZID=Asia/Seoul:${local(r.date, r.start)}`,
-    `DTEND;TZID=Asia/Seoul:${addMin(r.date, r.start, 180)}`,
+    ...(r.start
+      ? [`DTSTART;TZID=Asia/Seoul:${local(r.date, r.start)}`, `DTEND;TZID=Asia/Seoul:${addMin(r.date, r.start, 180)}`]
+      : [`DTSTART;VALUE=DATE:${ymd(r.date)}`, `DTEND;VALUE=DATE:${nextDay(r.date)}`]),
     `SUMMARY:${esc(`🏁 ${r.name}`)}`,
     `LOCATION:${esc(r.place)}`,
-    `DESCRIPTION:${esc(`출발 ${r.start}${r.startNote ? ` (${r.startNote})` : ""}\n${r.url}`)}`,
+    `DESCRIPTION:${esc(`${startLabel(r)}\n${r.url}`)}`,
     `URL:${r.url}`,
     "END:VEVENT",
   ];

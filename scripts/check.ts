@@ -40,6 +40,10 @@ const link = new URL(gcalRaceLink(byId("gangneung")));
 assert.equal(link.searchParams.get("dates"), "20270424T083000/20270424T113000");
 assert.equal(link.searchParams.get("ctz"), "Asia/Seoul");
 
+// 출발 시각 미공지 → 종일 일정
+const seoul = new URL(gcalRaceLink(byId("seoul")));
+assert.equal(seoul.searchParams.get("dates"), "20270321/20270322");
+
 // 다음 오픈
 assert.equal(nextOpening(races, at("2026-11-25T21:00:00"))?.race.id, "hapcheon");
 assert.equal(nextOpening(races, at("2026-12-07T10:00:01"))?.race.id, "yangcheon");

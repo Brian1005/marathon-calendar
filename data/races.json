@@ -50,7 +50,7 @@
       "date": "2027-03-07",
       "start": "08:30",
       "status": "open",
-      "statusText": "접수 중 (신청 화면 열림)",
+      "statusText": "신청 화면 열림 (마감 공지 없음)",
       "stages": [
         {
           "label": "5K·10K·하프 접수",
@@ -70,7 +70,7 @@
       "date": "2027-03-13",
       "start": "09:00",
       "status": "open",
-      "statusText": "접수 중 (신청 화면 열림)",
+      "statusText": "신청 화면 열림 (마감 공지 없음)",
       "stages": [
         {
           "label": "5K·10K·하프 접수",
@@ -83,6 +83,25 @@
       "verifiedAt": "2026-11-27"
     },
     {
+      "id": "changnyeong",
+      "name": "창녕 부곡온천 마라톤",
+      "region": "영남",
+      "place": "경남 창녕스포츠파크",
+      "date": "2027-03-13",
+      "start": "09:30",
+      "status": "auto",
+      "stages": [
+        {
+          "label": "하프·10K·5K",
+          "opens": "2026-12-07T10:00",
+          "closes": null
+        }
+      ],
+      "note": "선착순 마감. 마감일 미공지.",
+      "url": "https://www.cngmarathon.co.kr",
+      "verifiedAt": "2026-11-27"
+    },
+    {
       "id": "icheon",
       "name": "이천 도자기 마라톤",
       "region": "수도권",
@@ -90,7 +109,7 @@
       "date": "2027-03-14",
       "start": "08:30",
       "status": "open",
-      "statusText": "접수 중 (신청 화면 열림)",
+      "statusText": "신청 화면 열림 (마감 공지 없음)",
       "stages": [
         {
           "label": "5K·10K·하프 접수",
@@ -100,6 +119,67 @@
       ],
       "note": "선착순 6,000명 신청·입금되면 마감.",
       "url": "https://mara1080.com/event/2b3a03c4-4fc6-4d34-8a33-2449fafcaa23",
+      "verifiedAt": "2026-11-27"
+    },
+    {
+      "id": "dadaepo",
+      "name": "부산 다대포 마라톤",
+      "region": "영남",
+      "place": "부산 다대포해수욕장",
+      "date": "2027-03-14",
+      "start": null,
+      "startNote": "집결 08:00",
+      "status": "auto",
+      "stages": [
+        {
+          "label": "하프·10K·5K",
+          "opens": "2026-11-17",
+          "closes": "2026-12-04"
+        }
+      ],
+      "note": "선착순 마감. 접수 시각은 미공지.",
+      "url": "https://dadaeporun.kr",
+      "verifiedAt": "2026-11-27"
+    },
+    {
+      "id": "phsteel",
+      "name": "포항 철강마라톤",
+      "region": "영남",
+      "place": "경북 포항",
+      "date": "2027-03-20",
+      "start": "09:00",
+      "status": "unknown",
+      "statusText": "신청기간 추후 안내",
+      "stages": [
+        {
+          "label": "10K·5K",
+          "opens": null,
+          "closes": null
+        }
+      ],
+      "note": "공식 사이트에 '신청기간 추후 안내 예정'.",
+      "url": "http://phsteelrun.com",
+      "verifiedAt": "2026-11-27"
+    },
+    {
+      "id": "seoul",
+      "name": "서울마라톤 (동아마라톤)",
+      "region": "수도권",
+      "place": "서울 광화문광장 (풀) · 잠실종합운동장 (10K)",
+      "date": "2027-03-21",
+      "start": null,
+      "status": "closed",
+      "statusText": "접수 기간 종료 (2026년 6월)",
+      "stages": [
+        {
+          "label": "풀·10K 본접수",
+          "opens": "2026-06-01T19:00",
+          "closes": null,
+          "done": true
+        }
+      ],
+      "note": "2026년 6월 1~3일 그룹별 접수로 끝남. 집결 장소는 '예정'.",
+      "url": "https://seoul-marathon.com",
       "verifiedAt": "2026-11-27"
     },
     {
@@ -129,6 +209,26 @@
       ],
       "note": "마감 미공지.",
       "url": "https://hcmrt.or.kr",
+      "verifiedAt": "2026-11-27"
+    },
+    {
+      "id": "yeonggwang",
+      "name": "영광 광풍 마라톤",
+      "region": "호남",
+      "place": "전남 영광스포티움",
+      "date": "2027-03-28",
+      "start": "08:30",
+      "status": "open",
+      "statusText": "신청 화면 열림 (마감 공지 없음)",
+      "stages": [
+        {
+          "label": "하프·10K·5K",
+          "opens": null,
+          "closes": null
+        }
+      ],
+      "note": "선착순 7,000명 신청·입금되면 마감.",
+      "url": "https://mara1080.com/event/92394e8e-a27c-4c3a-b286-7233340a9e7a",
       "verifiedAt": "2026-11-27"
     },
     {

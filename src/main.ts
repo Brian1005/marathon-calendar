@@ -2,7 +2,7 @@ import "./style.css";
 import data from "../data/races.json";
 import {
   type Race, type StatusKey,
-  dday, dowOf, fmt, gcalLink, gcalRaceLink, hasTime, isListed, nextOpening, raceOver, statusOf, toDate,
+  dday, dowOf, fmt, gcalLink, gcalRaceLink, hasTime, isListed, nextOpening, raceOver, startLabel, statusOf, toDate,
 } from "./logic";
 import { getFilter, setFilter } from "./store";
 
@@ -60,7 +60,7 @@ function bibCard(r: Race, now: Date): HTMLElement {
     <div class="bib-num">
       <div><span class="d">${m}.${d}</span><span class="dow">${dowOf(r.date)}</span></div>
       <div class="name">${esc(r.name)}</div>
-      <div class="start">출발 ${r.start}${r.startNote ? ` (${esc(r.startNote)})` : ""}</div>
+      <div class="start">${esc(startLabel(r))}</div>
     </div>
     <div class="bib-body">
       <span class="status s-${st.key}">${esc(st.text)}</span>
@@ -68,7 +68,7 @@ function bibCard(r: Race, now: Date): HTMLElement {
       <p class="note">${esc(r.note)}</p>
       <p class="verified">공식 확인 ${fmt(r.verifiedAt)}</p>
       <a class="reg" id="reg-${r.id}" href="${gcalRaceLink(r)}" target="_blank" rel="noopener"
-         title="Google 캘린더에 대회일(${fmt(r.date)} ${r.start} 출발) 일정 추가">접수했어요 · 캘린더에 대회일 추가 ↗</a>
+         title="Google 캘린더에 대회일(${fmt(r.date)} ${esc(startLabel(r))}) 일정 추가">접수했어요 · 캘린더에 대회일 추가 ↗</a>
     </div>
     <div class="bib-foot">
       <span>${esc(r.place)}</span>

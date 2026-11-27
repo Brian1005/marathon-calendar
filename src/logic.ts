@@ -14,7 +14,7 @@ export type Race = {
   region: string;
   place: string;
   date: string; // 대회일 YYYY-MM-DD
-  start: string; // 출발 HH:mm
+  start: string | null; // 출발 HH:mm, null = 미공지
   startNote?: string;
   status: "auto" | "open" | "unknown" | "closed";
   statusText?: string;
@@ -87,17 +87,28 @@ export function nextOpening(races: Race[], now: Date): { race: Race; stage: Stag
   return best;
 }
 
-/** 접수한 대회의 대회일 일정 → Google 캘린더 "일정 추가" 링크 (출발부터 3시간) */
+/** "출발 08:30 (예정)" / "출발 시각 미공지" */
+export const startLabel = (r: Race) =>
+  `${r.start ? `출발 ${r.start}` : "출발 시각 미공지"}${r.startNote ? ` (${r.startNote})` : ""}`;
+
+/** 접수한 대회의 대회일 일정 → Google 캘린더 "일정 추가" 링크 (출발부터 3시간, 시각 미공지면 종일) */
 export function gcalRaceLink(r: Race): string {
-  const start = `${r.date}T${r.start}`;
-  const end = new Date(toDate(start).getTime() + 3 * 3_600_000 + KST).toISOString().slice(0, 16);
+  let dates: string;
+  if (r.start) {
+    const start = `${r.date}T${r.start}`;
+    const end = new Date(toDate(start).getTime() + 3 * 3_600_000 + KST).toISOString().slice(0, 16);
+    dates = `${start.replace(/[-:]/g, "")}00/${end.replace(/[-:]/g, "")}00`;
+  } else {
+    const next = new Date(toDate(r.date).getTime() + DAY + KST).toISOString().slice(0, 10);
+    dates = `${r.date.replace(/-/g, "")}/${next.replace(/-/g, "")}`;
+  }
   const p = new URLSearchParams({
     action: "TEMPLATE",
     text: `🏁 ${r.name}`,
-    dates: `${start.replace(/[-:]/g, "")}00/${end.replace(/[-:]/g, "")}00`,
+    dates,
     ctz: "Asia/Seoul",
     location: r.place,
-    details: `출발 ${r.start}${r.startNote ? ` (${r.startNote})` : ""}\n공식: ${r.url}`,
+    details: `${startLabel(r)}\n공식: ${r.url}`,
   });
   return `https://calendar.google.com/calendar/render?${p}`;
 }
@@ -118,7 +129,7 @@ export function gcalLink(r: Race, st: Stage): string {
     text: `${r.name} 접수 오픈 (${st.label})`,
     dates,
     ctz: "Asia/Seoul",
-    details: `대회 ${r.date} ${r.start} 출발\n공식: ${r.url}`,
+    details: `대회 ${r.date} ${startLabel(r)}\n공식: ${r.url}`,
   });
   return `https://calendar.google.com/calendar/render?${p}`;
 }

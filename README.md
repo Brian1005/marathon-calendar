@@ -23,6 +23,14 @@ npm run build    # public/ics 생성 → dist/
   - `open` / `unknown` / `closed`: 공지 내용을 직접 적는다. 이때 `statusText`를 같이 쓴다.
 - 대회를 수정하면 그 대회의 `verifiedAt`과 파일 맨 위 `updatedAt`도 고친다.
 
+## 대회 찾기
+
+1. **후보 수집:** GoRunning(`gorunning.kr/races`)에서 대상 기간 대회를 전부 모은다 (`korean-marathon-schedule` 패키지의 `searchEvents`).
+2. **필터:** 풀·하프·10K 중 하나라도 있는 로드 대회만. 트레일·울트라·5K 전용은 뺀다.
+3. **공식 확인:** 후보마다 공식 사이트에서 대회일·접수 기간을 확인한다. 공식 사이트에 그해 정보가 없으면 넣지 않는다.
+
+GoRunning에도 없는 대회는 놓칠 수 있다. 전국 대회를 다 모은 공식 DB는 없다.
+
 ## 자동 처리 (데이터를 고치지 않아도 되는 것)
 
 - `closes`가 지나거나 `status: "closed"`인 대회는 메인 목록에서 숨기고, 아래 "마감된 대회"로 옮긴다.
