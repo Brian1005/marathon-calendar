@@ -18,6 +18,7 @@ export type Race = {
   startNote?: string;
   status: "auto" | "open" | "unknown" | "closed";
   statusText?: string;
+  closedAt?: string; // 수동 마감(status "closed")이 공지된 날 YYYY-MM-DD
   stages: Stage[];
   note: string;
   url: string;
@@ -70,6 +71,20 @@ export function statusOf(r: Race, now: Date): { key: StatusKey; text: string } {
 
 /** 대회일이 지났는지 (대회 당일까지는 false) */
 export const raceOver = (r: Race, now: Date) => endOf(r.date) <= now;
+
+/** 마감된 날: 수동 마감은 closedAt, 자동 마감은 가장 늦은 closes. 모르면 null */
+export function closedOn(r: Race): string | null {
+  if (r.status === "closed") return r.closedAt ?? null;
+  const ends = r.stages.map((s) => s.closes!).filter(Boolean);
+  return ends.length ? ends.reduce((a, b) => (endOf(a) > endOf(b) ? a : b)) : null;
+}
+
+/** "마감된 대회"에 보일지: 마감 후 2주까지만. 마감일을 모르면 숨김 */
+export function showAsClosed(r: Race, now: Date): boolean {
+  if (raceOver(r, now) || statusOf(r, now).key !== "closed") return false;
+  const on = closedOn(r);
+  return !!on && now.getTime() < endOf(on).getTime() + 14 * DAY;
+}
 
 /** 메인 목록에 보일지: 마감·지난 대회는 숨김 */
 export const isListed = (r: Race, now: Date) =>

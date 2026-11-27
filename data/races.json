@@ -307,6 +307,7 @@
       "start": "07:30",
       "status": "closed",
       "statusText": "마감 (9,500명 모집 완료)",
+      "closedAt": "2026-11-04",
       "stages": [
         {
           "label": "하프·10K·3K",

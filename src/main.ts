@@ -2,7 +2,7 @@ import "./style.css";
 import data from "../data/races.json";
 import {
   type Race, type StatusKey,
-  dday, dowOf, fmt, gcalLink, gcalRaceLink, hasTime, isListed, nextOpening, raceOver, startLabel, statusOf, toDate,
+  dday, dowOf, fmt, gcalLink, gcalRaceLink, hasTime, isListed, nextOpening, startLabel, showAsClosed, statusOf, toDate,
 } from "./logic";
 import { getFilter, setFilter } from "./store";
 
@@ -126,8 +126,8 @@ function render() {
   if (rows.length) list.replaceChildren(...rows.map((r) => bibCard(r, now)));
   else list.innerHTML = `<p class="empty">조건에 맞는 대회가 없습니다.</p>`;
 
-  // 마감됐지만 아직 안 열린 대회 (이미 접수한 경우 체크용)
-  const closed = races.filter((r) => !isListed(r, now) && !raceOver(r, now));
+  // 마감 후 2주 동안만 (이미 접수한 경우 체크용)
+  const closed = races.filter((r) => showAsClosed(r, now));
   $("closed-section").hidden = closed.length === 0;
   $("closed-count").textContent = String(closed.length);
   $("closed").replaceChildren(...closed.map((r) => bibCard(r, now)));

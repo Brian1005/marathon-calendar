@@ -1,7 +1,7 @@
 // 날짜·상태 로직 점검: npm run check
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { dday, dowOf, fmt, gcalRaceLink, isListed, nextOpening, statusOf, type Race } from "../src/logic.ts";
+import { dday, dowOf, fmt, gcalRaceLink, isListed, nextOpening, showAsClosed, statusOf, type Race } from "../src/logic.ts";
 
 const data = JSON.parse(readFileSync(new URL("../data/races.json", import.meta.url), "utf8"));
 const races = data.races as Race[];
@@ -34,6 +34,13 @@ assert.equal(isListed(sm, at("2027-03-31T00:00:01")), false);
 
 // 기장(수동 마감) → 목록에서 숨김
 assert.equal(isListed(byId("gijang"), at("2026-11-25T12:00:00")), false);
+
+// 마감된 대회 칸: 마감 후 2주까지만
+assert.equal(showAsClosed(byId("gijang"), at("2026-11-18T23:00:00")), true); // 11/04 마감 + 14일
+assert.equal(showAsClosed(byId("gijang"), at("2026-11-19T00:00:01")), false);
+assert.equal(showAsClosed(sm, at("2027-04-13T23:00:00")), true); // 3/30 마감 + 14일
+assert.equal(showAsClosed(sm, at("2027-04-14T00:00:01")), false);
+assert.equal(showAsClosed(byId("seoul"), at("2026-11-27T12:00:00")), false); // 마감일 없음 → 숨김
 
 // 접수했어요 → 대회일 캘린더 링크: 강릉 2027-04-24 08:30~11:30 KST
 const link = new URL(gcalRaceLink(byId("gangneung")));
