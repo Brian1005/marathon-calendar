@@ -69,8 +69,8 @@
       "place": "충남 금산인삼엑스포주차장",
       "date": "2027-03-13",
       "start": "09:00",
-      "status": "unknown",
-      "statusText": "접수 시작일 미공지",
+      "status": "open",
+      "statusText": "접수 중 (신청 화면 열림)",
       "stages": [
         {
           "label": "5K·10K·하프 접수",
@@ -89,8 +89,8 @@
       "place": "경기 이천종합운동장",
       "date": "2027-03-14",
       "start": "08:30",
-      "status": "unknown",
-      "statusText": "접수 시작일 미공지",
+      "status": "open",
+      "statusText": "접수 중 (신청 화면 열림)",
       "stages": [
         {
           "label": "5K·10K·하프 접수",
